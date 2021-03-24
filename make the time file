@@ -1,0 +1,135 @@
+#include<iostream>
+#include<string>
+using namespace std;
+class TimeT
+{
+public:
+	float  hours = 0.0, min = 0.0, sec = 0.0;
+	int year = 0,months=0 ,day=0 ;
+	string monstr;
+	void getin()
+	{
+		cout << "Enter the days : ";
+		cin >> day;
+		cout << "Enter the months : ";
+		cin >> months;
+		cout << "Enter the years : ";
+		cin >> year;
+		cout << "Enter the time in hours: min : sec  ";
+		cin >> hours >> min >> sec;
+	}
+	void printtime()
+	{
+		cout << endl << year << " " << day << " " << (int)hours << ":" << (int)min << ":" << (int)sec << "\n";
+	}
+	friend void cal(TimeT a, TimeT b);
+	friend void execute(TimeT);
+};
+void cal(TimeT a, TimeT b)
+{
+	TimeT c;
+	c.sec = a.sec + b.sec;
+	c.min = a.min + b.min;
+	c.hours = a.hours + b.hours;
+	c.day = a.day + b.day;
+	c.months = a.months + b.months;
+	c.year = a.year + b.year;
+	execute(c);
+}
+void execute(TimeT a)
+{
+	float d, m;
+	if (a.sec > 60)
+	{
+		a.min = (a.min + (int)(a.sec / 60));
+		a.sec = ((a.sec / 60) - ((int)(a.sec / 60))) * 60;
+	}
+	if (a.min > 60)
+	{
+		a.hours = (a.hours + (int)(a.min / 60));
+		a.min = ((a.min / 60) - ((int)(a.min / 60))) * 60;
+	}
+	if (a.hours > 24)
+	{
+		a.day = (a.day + (int)(a.hours / 24));
+		a.hours = ((a.hours / 24) - ((int)(a.hours / 24))) * 24;
+	}
+	if ((a.year % 4 == 0) && (a.months == 2) && (a.day > 28))
+	{
+		a.months = (a.months + (int)(a.day / 28));
+		d = (float(a.day)) / 28;
+		a.day = (d - ((int)(a.day / 28))) * 28;
+	}
+	if ((a.months == 2) && (a.day > 29))
+	{
+		a.months = (a.months + (int)(a.day / 29));
+		d = (float(a.day)) / 29;
+		a.day = (d - ((int)(a.day / 29))) * 29;
+	}
+	if (a.day > 30)
+	{
+		a.months = (a.months + (int)(a.day / 30));
+		d =(float(a.day)) / 30;
+		a.day = (d - ((int)(a.day / 30))) * 30;
+	}
+	BAS:if (a.months > 12)
+	{
+		a.year = (a.year + (int)(a.months / 12));
+		m = (float(a.months)) / 12;
+		a.months = (m - ((int)(a.months / 12))) * 12;
+	}
+	if (a.months > 12)
+	{
+		goto BAS;
+	}
+	a.printtime();
+	switch (a.months)
+	{
+	case 1:
+		a.monstr = "January";
+		break;
+	case 2:
+		a.monstr = "February";
+		break;
+	case 3:
+		a.monstr = "March";
+		break;
+	case 4:
+		a.monstr = "April";
+		break;
+	case 5:
+		a.monstr = "May";
+		break;
+	case 6:
+		a.monstr = "June";
+		break;
+	case 7:
+		a.monstr = "July";
+		break;
+	case 8:
+		a.monstr = "August";
+		break;
+	case 9:
+		a.monstr = "September";
+		break;
+	case 10:
+		a.monstr = "October";
+		break;
+	case 11:
+		a.monstr = "November";
+		break;
+	case 12:
+		a.monstr = "December";
+		break;
+	default:
+		cout << "Wrong Input! Please try again\n";
+	}
+	cout << a.monstr<<endl;
+}
+int main()
+{
+	TimeT a, b;
+	a.getin();
+	b.getin();
+	cal(a, b);
+}
