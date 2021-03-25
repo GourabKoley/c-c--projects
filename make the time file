@@ -1,3 +1,4 @@
+This is a new update in time file
 #include<iostream>
 #include<string>
 using namespace std;
@@ -18,9 +19,56 @@ public:
 		cout << "Enter the time in hours: min : sec  ";
 		cin >> hours >> min >> sec;
 	}
+	string non(int a)
+	{
+		string mon;
+		switch (a)
+		{
+		case 1:
+			mon = "January";
+			break;
+		case 2:
+			mon = "February";
+			break;
+		case 3:
+			mon = "March";
+			break;
+		case 4:
+			mon = "April";
+			break;
+		case 5:
+			mon = "May";
+			break;
+		case 6:
+			mon = "June";
+			break;
+		case 7:
+			mon = "July";
+			break;
+		case 8:
+			mon = "August";
+			break;
+		case 9:
+			mon = "September";
+			break;
+		case 10:
+			mon = "October";
+			break;
+		case 11:
+			mon = "November";
+			break;
+		case 12:
+			mon = "December";
+			break;
+		default:
+			mon = "No months ";
+		}
+		return mon;
+	}
 	void printtime()
 	{
-		cout << endl << year << " " << day << " " << (int)hours << ":" << (int)min << ":" << (int)sec << "\n";
+		monstr = non(months);
+		cout << endl << year << " " <<monstr <<" "<< day << " " << (int)hours << ":" << (int)min << ":" << (int)sec << "\n";
 	}
 	friend void cal(TimeT a, TimeT b);
 	friend void execute(TimeT);
@@ -72,59 +120,13 @@ void execute(TimeT a)
 		d =(float(a.day)) / 30;
 		a.day = (d - ((int)(a.day / 30))) * 30;
 	}
-	BAS:if (a.months > 12)
+	if (a.months > 12)
 	{
 		a.year = (a.year + (int)(a.months / 12));
 		m = (float(a.months)) / 12;
 		a.months = (m - ((int)(a.months / 12))) * 12;
 	}
-	if (a.months > 12)
-	{
-		goto BAS;
-	}
 	a.printtime();
-	switch (a.months)
-	{
-	case 1:
-		a.monstr = "January";
-		break;
-	case 2:
-		a.monstr = "February";
-		break;
-	case 3:
-		a.monstr = "March";
-		break;
-	case 4:
-		a.monstr = "April";
-		break;
-	case 5:
-		a.monstr = "May";
-		break;
-	case 6:
-		a.monstr = "June";
-		break;
-	case 7:
-		a.monstr = "July";
-		break;
-	case 8:
-		a.monstr = "August";
-		break;
-	case 9:
-		a.monstr = "September";
-		break;
-	case 10:
-		a.monstr = "October";
-		break;
-	case 11:
-		a.monstr = "November";
-		break;
-	case 12:
-		a.monstr = "December";
-		break;
-	default:
-		cout << "Wrong Input! Please try again\n";
-	}
-	cout << a.monstr<<endl;
 }
 int main()
 {
