@@ -1,0 +1,58 @@
+This project works only with use of hours, min and seconds upon the user choice 
+
+
+#include<iostream>
+using namespace std;
+class timej
+{
+    public:
+    int h,m,s;
+    timej()
+    {
+        h=0;
+        m=0;
+        s=0;
+    }
+    timej(int hou,int min,int sec)
+    {
+        h=hou;
+        m=min;
+        s=sec;
+    }
+    void get()
+    {
+        cout<<"Enter the time in h:m:s >";
+        cin>>h>>m>>s;
+    }
+    void display()
+    {
+        cout<<h<<":"<<m<<":"<<s;
+    }
+    friend void add(timej,timej);
+};
+void add(timej a,timej b)
+{
+    timej c;
+    c.h=a.h+b.h;
+    c.m=a.m+b.m;
+    c.s=a.s+b.s;
+    if(c.s>59)
+    {
+        c.m=c.m+(int)(c.s/59);
+        c.s=(((float(c.s))/59)-(int)(c.s/59))*59;
+    }
+    if(c.m>59)
+    {
+        c.h=c.h+(int)(c.m/59);
+        c.m=(((float(c.m))/59)-(int)(c.m/59))*59;
+    }
+    c.display();
+}
+int main()
+{
+    timej aj,bj;
+    aj.get();
+    bj.get();
+    add(aj,bj);
+    return 0;
+}
